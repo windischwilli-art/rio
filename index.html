@@ -8,13 +8,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
         :root {
-            --bg-cream: #f3efe3; /* Der edle, warme Cremeton aus deinem Foto */
-            --primary-green: #0b3c26; /* Edles Dschungelgrün */
-            --accent-tan: #d9c2b0; /* Exakter Beige-Ton für Buttons aus dem Foto */
-            --accent-red: #b81d24;
-            --text-dark: #111111;
+            --bg-cream: #f4f0e6;      /* Der perfekte, warme Museums-Cremeton */
+            --primary-green: #072216; /* Tiefes, luxuriöses Dschungel-Schwarzgrün */
+            --accent-tan: #d4bda8;    /* Edles Sand-Beige aus deinem Design */
+            --accent-red: #a62429;    /* Tiefes Erdbeer-Rot */
+            --text-dark: #1a1a1a;
+            --text-muted: #555555;
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Sanftes, fließendes Scrollen */
+        html {
+            scroll-behavior: smooth;
         }
 
         * {
@@ -27,122 +33,161 @@
             font-family: var(--font-sans);
             background-color: var(--bg-cream);
             color: var(--text-dark);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* --- FLIESSENDE PALMENBLÄTTER (Hintergrund-Effekte) --- */
-        .palm-overlay {
+        /* --- KEYFRAMES FÜR DIE FLIESSENDEN BEWEGUNGEN --- */
+        @keyframes floatSlow-1 {
+            0% { transform: translateY(0px) rotate(-5deg) scale(1); }
+            50% { transform: translateY(-15px) rotate(-3deg) scale(1.02); }
+            100% { transform: translateY(0px) rotate(-5deg) scale(1); }
+        }
+
+        @keyframes floatSlow-2 {
+            0% { transform: scaleX(-1) translateY(0px) rotate(-8deg); }
+            50% { transform: scaleX(-1) translateY(-20px) rotate(-11deg); }
+            100% { transform: scaleX(-1) translateY(0px) rotate(-8deg); }
+        }
+
+        @keyframes floatSlow-3 {
+            0% { transform: translateY(0px) rotate(15deg); }
+            50% { transform: translateY(10px) rotate(18deg); }
+            100% { transform: translateY(0px) rotate(15deg); }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- DIE PREMIUM TROPICAL ATMOSPHÄRE --- */
+        .ambient-glow {
             position: absolute;
-            width: 35vw;
-            max-width: 450px;
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(212, 189, 168, 0.15) 0%, rgba(244, 240, 230, 0) 70%);
+            top: -10%;
+            left: -10%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Hochpräzise, elegant gerenderte Palmen-Vektoren statt simpler ClipArt */
+        .palm-element {
+            position: absolute;
+            width: 42vw;
+            max-width: 550px;
             height: auto;
             pointer-events: none;
             z-index: 1;
-            /* Mehrschichtiger, extrem weicher Schatten für den fließenden Tiefeneffekt */
-            filter: drop-shadow(15px 25px 35px rgba(11, 60, 38, 0.2)) blur(0.5px);
-            opacity: 0.95;
+            opacity: 0.92;
+            filter: drop-shadow(20px 30px 40px rgba(7, 34, 22, 0.12)) blur(0.5px);
         }
 
         .palm-top-left {
-            top: -2%;
-            left: -5%;
-            transform: rotate(-5deg);
+            top: -4%;
+            left: -6%;
+            animation: floatSlow-1 12s ease-in-out infinite;
         }
 
         .palm-top-right {
             top: -2%;
-            right: -5%;
-            transform: scaleX(-1) rotate(-10deg);
+            right: -6%;
+            animation: floatSlow-2 14s ease-in-out infinite;
         }
 
         .palm-mid-left {
-            top: 45%;
+            top: 35%;
             left: -8%;
-            transform: rotate(25deg);
-            width: 25vw;
-            opacity: 0.6; /* Sanftes Ausblenden im Mittelteil */
+            width: 30vw;
+            opacity: 0.5;
+            animation: floatSlow-3 16s ease-in-out infinite;
         }
 
         .palm-bottom-right {
             bottom: -2%;
-            right: -5%;
-            transform: scale(-1) rotate(-5deg);
+            right: -6%;
+            transform: scale(-1);
+            opacity: 0.85;
         }
 
-        /* Sanfter, diffuser Blätterschatten auf der gesamten Wand */
-        .ambient-shadow-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.06;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0,100 Q40,40 100,0' stroke='%230b3c26' stroke-width='2' fill='none'/%3E%3Cpath d='M20,70 Q-5,45 10,40 Q25,50 20,70 Z' fill='%230b3c26'/%3E%3Cpath d='M40,50 Q15,25 30,20 Q45,30 40,50 Z' fill='%230b3c26'/%3E%3C/svg%3E");
-            background-size: 40% 40%;
-            filter: blur(20px); /* Macht den Hintergrund-Übergang super fließend */
-        }
-
-        /* --- HEADER & NEUES LOGO --- */
+        /* --- HEADER & MINIMALISTISCHES PREMIUM LOGO --- */
         header {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 40px 6%;
+            padding: 60px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 10;
         }
 
-        .logo-container {
+        .brand-logo {
             display: flex;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--primary-green);
+            transition: opacity 0.3s;
         }
 
-        .logo-serif {
+        .brand-logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo-text {
             font-family: var(--font-serif);
-            font-size: clamp(2.8rem, 6vw, 3.8rem);
+            font-size: clamp(2.8rem, 5vw, 3.5rem);
             font-weight: 400;
+            letter-spacing: -1px;
             line-height: 1;
         }
 
-        .logo-toucan-box {
-            height: clamp(2.4rem, 5.2vw, 3.4rem);
+        /* Der exakte, elegant-geometrische Tukan */
+        .logo-icon-container {
+            height: clamp(2.4rem, 4.3vw, 3rem);
             display: flex;
             align-items: center;
-            margin-top: 6px;
-            padding: 0 1px;
+            margin-top: 8px;
         }
 
-        .logo-toucan-svg {
+        .tucan-svg {
             height: 100%;
             width: auto;
         }
 
-        .nav-social a {
-            color: var(--text-dark);
+        .nav-links a {
+            color: var(--primary-green);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-left: 25px;
-            transition: opacity 0.3s;
+            letter-spacing: 3px;
+            margin-left: 35px;
+            position: relative;
+            transition: color 0.3s;
         }
 
-        .nav-social a:hover {
-            opacity: 0.5;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--primary-green);
+            transition: width 0.3s ease;
         }
 
-        /* --- HERO SECTION --- */
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SECTION (EDITORIAL STYLE) --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -150,247 +195,285 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 150px 20px 100px 20px;
+            padding: 180px 24px 100px 24px;
             position: relative;
             z-index: 2;
         }
 
-        .hero-badge {
-            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+        .hero-pre {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
             text-transform: uppercase;
-            letter-spacing: 5px;
-            color: var(--text-dark);
-            margin-bottom: 20px;
+            letter-spacing: 7px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
             font-weight: 400;
         }
 
         .hero h1 {
             font-family: var(--font-serif);
-            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-size: clamp(3.5rem, 9vw, 6.5rem);
             font-weight: 400;
-            line-height: 1.15;
-            color: var(--text-dark);
-            max-width: 900px;
-            margin-bottom: 50px;
+            line-height: 1.1;
+            color: var(--primary-green);
+            max-width: 1000px;
+            margin-bottom: 60px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: -1px;
         }
 
-        /* Der exakte eckige Button aus deinem Foto */
-        .btn-rect {
+        /* Der exakt eckige, edle Button aus dem Design */
+        .btn-premium {
             display: inline-block;
             background-color: var(--accent-tan);
-            color: var(--text-dark);
+            color: var(--primary-green);
             font-family: var(--font-sans);
-            font-weight: 500;
-            font-size: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            padding: 16px 45px;
+            letter-spacing: 5px;
+            padding: 20px 55px;
             text-decoration: none;
-            border-radius: 0; /* Absolut eckig */
-            transition: all 0.3s ease;
+            border-radius: 0;
+            border: 1px solid transparent;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .btn-rect:hover {
-            background-color: #cbab95;
-            transform: translateY(-1px);
+        .btn-premium:hover {
+            background-color: transparent;
+            border-color: var(--primary-green);
+            transform: translateY(-2px);
         }
 
-        /* --- HIGHLIGHTS (THE BIG THREE) --- */
-        .highlights {
-            padding: 140px 6%;
-            position: relative;
-            z-index: 2;
-            background-color: rgba(255, 255, 255, 0.4); /* Leicht transparent für weiche Übergänge */
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(11, 60, 38, 0.05);
-            border-bottom: 1px solid rgba(11, 60, 38, 0.05);
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 90px auto;
-        }
-
-        .section-header h2 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            color: var(--primary-green);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
-        .section-header p {
-            font-size: 1.25rem;
-            color: #333;
-            font-weight: 300;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background-color: var(--bg-cream);
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
-            border-top: 5px solid var(--primary-green);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            transition: transform 0.3s ease;
-        }
-
-        .card:nth-child(2) { border-top-color: #cbab95; }
-        .card:nth-child(3) { border-top-color: var(--accent-red); }
-
-        .card:hover {
-            transform: translateY(-3px);
-        }
-
-        .card-icon {
-            margin-bottom: 30px;
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            border-radius: 50%;
-        }
-
-        .card-icon svg {
-            width: 35px;
-            height: 35px;
-        }
-
-        .card h3 {
-            font-family: var(--font-serif);
-            font-size: 1.9rem;
-            color: var(--primary-green);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .card p {
-            color: #222;
-            font-size: 1.05rem;
-            margin-bottom: 35px;
-            flex-grow: 1;
-        }
-
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tag {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 6px 14px;
-            background-color: rgba(11, 60, 38, 0.05);
-            color: var(--primary-green);
-        }
-
-        /* --- VIBE SECTION --- */
-        .vibe {
+        /* --- FLIESSENDES MARQUEE BAND --- */
+        .marquee-container {
+            overflow: hidden;
             background-color: var(--primary-green);
             color: var(--bg-cream);
-            padding: 140px 6%;
-            text-align: center;
+            padding: 24px 0;
             position: relative;
-            z-index: 2;
+            z-index: 3;
+            display: flex;
+            white-space: nowrap;
         }
 
-        .vibe-content {
-            max-width: 850px;
+        .marquee-content {
+            display: flex;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-content span {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            text-transform: uppercase;
+            padding: 0 40px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        .marquee-content span::after {
+            content: '•';
+            margin-left: 80px;
+            color: var(--accent-tan);
+        }
+
+        /* --- THE BIG THREE (ASYMMETRIC STORYTELLING) --- */
+        .editorial-section {
+            padding: 160px 8%;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(244, 240, 230, 0.8);
+            backdrop-filter: blur(15px);
+        }
+
+        .editorial-intro {
+            max-width: 800px;
+            margin-bottom: 120px;
+        }
+
+        .editorial-intro h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            color: var(--primary-green);
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .editorial-intro p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        /* Premium Luxus-Reihe für die Produkte */
+        .story-row {
+            display: flex;
+            flex-direction: column;
+            gap: 140px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
-        .vibe h2 {
+        .story-block {
+            display: grid;
+            grid-template-columns: 80px 1fr 1.2fr;
+            gap: 40px;
+            border-top: 1px solid rgba(7, 34, 22, 0.1);
+            padding-top: 40px;
+        }
+
+        .story-num {
             font-family: var(--font-serif);
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
-            margin-bottom: 35px;
+            font-size: 2rem;
+            color: var(--accent-tan);
+            font-style: italic;
+        }
+
+        .story-title h3 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--primary-green);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            line-height: 1.2;
         }
 
-        .vibe p {
-            font-size: clamp(1.15rem, 2.5vw, 1.4rem);
-            font-weight: 300;
-            opacity: 0.95;
-            line-height: 1.8;
+        .story-tag {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 6px 16px;
+            background-color: white;
+            color: var(--primary-green);
+            border: 1px solid rgba(7, 34, 22, 0.08);
         }
 
-        /* --- LOCATION SECTION --- */
-        .location {
-            padding: 130px 6%;
+        .story-text {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            padding-top: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .story-text p {
+            margin-bottom: 30px;
+        }
+
+        /* --- BRAND VIBE PANEL --- */
+        .vibe-panel {
+            background-color: var(--primary-green);
+            color: var(--bg-cream);
+            padding: 160px 8%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .vibe-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .vibe-wrapper h4 {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--accent-tan);
+            margin-bottom: 30px;
+        }
+
+        .vibe-wrapper p {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        /* --- CLOSING POSTER SECTION --- */
+        .closing-poster {
+            padding: 140px 8%;
             text-align: center;
             position: relative;
             z-index: 2;
         }
 
-        .location-info {
-            max-width: 500px;
+        .poster-box {
+            max-width: 600px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .pin-icon {
-            width: 36px;
-            height: 36px;
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-
-        .address, .city {
-            font-family: var(--font-sans);
-            font-size: clamp(1rem, 2.5vw, 1.15rem);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            line-height: 1.6;
-        }
-
-        .status-badge {
-            margin-top: 25px;
-            display: inline-block;
-            padding: 10px 25px;
-            background-color: rgba(11, 60, 38, 0.06);
+        .location-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 30px;
             color: var(--primary-green);
+        }
+
+        .street {
+            font-family: var(--font-sans);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .city {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--primary-green);
+            text-transform: uppercase;
+            margin-bottom: 35px;
+        }
+
+        .badge-opening {
+            display: inline-block;
+            padding: 12px 35px;
+            background-color: var(--primary-green);
+            color: var(--bg-cream);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
         }
 
         /* --- FOOTER --- */
         footer {
-            padding: 60px 6%;
+            padding: 80px 8% 40px 8%;
             text-align: center;
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.85rem;
+            color: #777;
             position: relative;
             z-index: 2;
             letter-spacing: 1px;
-            border-top: 1px solid rgba(11, 60, 38, 0.03);
+            border-top: 1px solid rgba(7, 34, 22, 0.05);
+        }
+
+        /* RESPONSIVE FINETUNING */
+        @media (max-width: 992px) {
+            .story-block {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                gap: 20px;
+            }
+            .story-num { order: 1; }
+            .story-title { order: 2; }
+            .story-text { order: 3; }
         }
 
         @media (max-width: 768px) {
-            header { padding: 30px 6%; }
-            .hero { padding-top: 180px; }
-            .card { padding: 45px 30px; }
-            .palm-overlay { width: 50vw; }
+            header { padding: 40px 6%; }
+            .hero { padding-top: 200px; }
+            .palm-element { width: 60vw; }
         }
     </style>
 </head>
@@ -398,133 +481,129 @@
 
     <svg style="display: none;">
         <defs>
-            <linearGradient id="palmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#071f14" />
-                <stop offset="70%" stop-color="#113d28" />
-                <stop offset="100%" stop-color="#164a32" />
+            <linearGradient id="premiumLeafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#03110b" />
+                <stop offset="50%" stop-color="#072216" />
+                <stop offset="100%" stop-color="#0f3d29" />
             </linearGradient>
             
-            <g id="single-leaf-frond">
-                <path d="M0,100 Q25,65 85,0" stroke="#05170f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                <path d="M8,90 Q-18,65 2,60 Q12,70 10,87 Z" fill="url(#palmGradient)"/>
-                <path d="M16,80 Q-12,48 12,46 Q20,56 18,75 Z" fill="url(#palmGradient)"/>
-                <path d="M25,68 Q0,25 25,28 Q30,38 27,62 Z" fill="url(#palmGradient)"/>
-                <path d="M35,56 Q12,10 36,16 Q42,26 37,50 Z" fill="url(#palmGradient)"/>
-                <path d="M45,44 Q28,-3 48,6 Q52,16 47,38 Z" fill="url(#palmGradient)"/>
-                <path d="M55,32 Q42,-12 60,-2 Q64,8 57,26 Z" fill="url(#palmGradient)"/>
-                <path d="M65,20 Q56,-15 72,-5 Q73,5 67,16 Z" fill="url(#palmGradient)"/>
-                <path d="M6,93 Q32,86 22,76 Q12,73 8,89 Z" fill="#061a10"/>
-                <path d="M14,83 Q42,74 30,64 Q20,64 16,79 Z" fill="#04140c"/>
-                <path d="M22,72 Q50,60 40,50 Q30,52 25,68 Z" fill="#061a10"/>
-                <path d="M32,60 Q58,47 48,37 Q38,40 34,56 Z" fill="#04140c"/>
-                <path d="M42,48 Q66,34 56,25 Q47,29 44,44 Z" fill="#061a10"/>
-                <path d="M52,36 Q74,22 64,14 Q55,18 53,32 Z" fill="#04140c"/>
+            <g id="premium-leaf-frond">
+                <path d="M5,95 Q30,60 90,5" stroke="#020d08" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M12,85 Q-20,55 5,50 Q18,62 15,80 Z" fill="url(#premiumLeafGrad)"/>
+                <path d="M22,73 Q-10,38 18,35 Q28,48 24,68 Z" fill="url(#premiumLeafGrad)"/>
+                <path d="M34,60 Q5,15 32,18 Q42,32 37,55 Z" fill="url(#premiumLeafGrad)"/>
+                <path d="M46,46 Q20,-10 46,0 Q54,16 48,40 Z" fill="url(#premiumLeafGrad)"/>
+                <path d="M58,32 Q40,-20 60,-8 Q66,8 59,26 Z" fill="url(#premiumLeafGrad)"/>
+                <path d="M10,88 Q38,80 26,68 Q14,65 10,84 Z" fill="#04160e"/>
+                <path d="M20,76 Q48,66 36,54 Q24,52 20,72 Z" fill="#03110b"/>
+                <path d="M30,63 Q58,52 46,40 Q34,38 30,58 Z" fill="#04160e"/>
+                <path d="M42,50 Q68,36 56,26 Q46,26 42,44 Z" fill="#03110b"/>
             </g>
         </defs>
     </svg>
 
-    <div class="ambient-shadow-bg"></div>
+    <div class="ambient-glow"></div>
 
-    <div class="palm-overlay palm-top-left"><svg viewBox="0 0 100 100"><use href="#single-leaf-frond"/></svg></div>
-    <div class="palm-overlay palm-top-right"><svg viewBox="0 0 100 100"><use href="#single-leaf-frond"/></svg></div>
-    <div class="palm-overlay palm-mid-left"><svg viewBox="0 0 100 100"><use href="#single-leaf-frond"/></svg></div>
-    <div class="palm-overlay palm-bottom-right"><svg viewBox="0 0 100 100"><use href="#single-leaf-frond"/></svg></div>
+    <div class="palm-element palm-top-left"><svg viewBox="0 0 100 100"><use href="#premium-leaf-frond"/></svg></div>
+    <div class="palm-element palm-top-right"><svg viewBox="0 0 100 100"><use href="#premium-leaf-frond"/></svg></div>
+    <div class="palm-element palm-mid-left"><svg viewBox="0 0 100 100"><use href="#premium-leaf-frond"/></svg></div>
+    <div class="palm-element palm-bottom-right"><svg viewBox="0 0 100 100"><use href="#premium-leaf-frond"/></svg></div>
 
     <header>
-        <a href="#" class="logo-container">
-            <span class="logo-serif">R</span>
-            <div class="logo-toucan-box">
-                <svg class="logo-toucan-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M36 26C36 26 41 12 55 12C65 12 94 14 89 41C86 44 75 42 65 37C58 33 52 39 50 45C46 58 48 76 45 88C44 92 41 94 39 94C37 94 36 90 37 82C38 70 34 47 38 26Z" fill="currentColor"/>
-                    <path d="M41 84L36 107H42L44 86Z" fill="currentColor"/>
-                    <circle cx="50" cy="22" r="2.8" fill="#f3efe3"/>
+        <a href="#" class="brand-logo">
+            <span class="logo-text">R</span>
+            <div class="logo-icon-container">
+                <svg class="tucan-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M35 20C35 20 40 5 56 5C68 5 96 8 92 38C88 41 76 39 65 34C58 30 51 36 49 42C45 56 46 75 43 88C42 91 39 93 36 93C33 93 32 89 33 80C35 68 31 43 35 20Z" fill="currentColor"/>
+                    <path d="M39 84L34 107H41L43 86Z" fill="currentColor"/>
+                    <circle cx="50" cy="16" r="3" fill="var(--bg-cream)"/>
                 </svg>
             </div>
-            <span class="logo-serif">o</span>
+            <span class="logo-text">o</span>
         </a>
-        <div class="nav-social">
+        <div class="nav-links">
             <a href="#" target="_blank">Instagram</a>
             <a href="#" target="_blank">TikTok</a>
         </div>
     </header>
 
     <section class="hero">
-        <div class="hero-badge">Hier entsteht</div>
+        <div class="hero-pre">Hier entsteht</div>
         <h1>Etwas<br>besonderes</h1>
-        <a href="#explore" class="btn-rect">Stay Tuned!</a>
+        <a href="#explore" class="btn-premium">Stay Tuned</a>
     </section>
 
-    <section class="highlights" id="explore">
-        <div class="section-header">
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>Tech meets Tropics</span>
+            <span>Future Coffee Bar</span>
+            <span>Premium Açaí Bowls</span>
+            <span>Liquid Luxury Fruits</span>
+            <span>Tech meets Tropics</span>
+            <span>Future Coffee Bar</span>
+            <span>Premium Açaí Bowls</span>
+            <span>Liquid Luxury Fruits</span>
+        </div>
+    </div>
+
+    <section class="editorial-section" id="explore">
+        <div class="editorial-intro">
             <h2>The Big Three</h2>
-            <p>Die perfekte Fusion aus Tech, Frische und absolutem Foodporn.</p>
+            <p>Die unzensierte Symbiose aus digitaler Perfektion, kompromissloser Frische und purem Foodporn.</p>
         </div>
-        
-        <div class="grid">
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#0b3c26" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2V4M5 10H3M21 10H19M12 4C8.68629 4 6 6.68629 6 10V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V10C18 6.68629 15.3137 4 12 4ZM9 11C9 11.5523 8.55228 12 8 12C7.44772 12 7 11.5523 7 11C7 10.4477 7.44772 10 8 10C8.55228 10 9 10.4477 9 11ZM17 11C17 11.5523 16.5523 12 16 12C15.4477 12 15 11.5523 15 11C15 10.4477 15.4477 10 16 10C16.5523 10 17 10.4477 17 11ZM9 15H15V17H9V15Z"/>
-                    </svg>
+
+        <div class="story-row">
+            <div class="story-block">
+                <div class="story-num">01</div>
+                <div class="story-title">
+                    <h3>Future Coffee</h3>
+                    <span class="story-tag">Robot-Barista Tech</span>
                 </div>
-                <h3>01. Future Coffee</h3>
-                <p>Erlebe Kaffee in chirurgischer Präzision. Unser Kaffeeroboter kreiert die perfekte Crema, grammgenau temperierte Milchalternativen und faszinierende Latte Art live vor deinen Augen.</p>
-                <div class="card-tags">
-                    <span class="tag">Robot-Barista</span>
-                    <span class="tag">Next-Gen Tech</span>
+                <div class="story-text">
+                    <p>Erlebe Kaffee neu definiert durch chirurgische Präzision. Unser hochmoderner Kaffeeroboter berechnet Temperatur, Druck und Extraktionszeit im Millisekunden-Takt. Das Ergebnis ist eine makellose Crema, grammgenau geschäumte Milchalternativen und faszinierende Latte Art, live kreiert vor deinen Augen.</p>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 12C2 16.9706 6.02944 21 11 21C15.9706 21 20 16.9706 20 12H2Z" fill="#cbab95"/>
-                        <path d="M12 3C8.5 3 6 5.5 6 8.5C6 9 6.5 10 8 10C9.5 10 10.5 8.5 12 8.5C13.5 8.5 14.5 10 16 10C17.5 10 18 9 18 8.5C18 5.5 15.5 3 12 3Z" fill="#0b3c26"/>
-                    </svg>
+            <div class="story-block">
+                <div class="story-num">02</div>
+                <div class="story-title">
+                    <h3>Açaí Bowls</h3>
+                    <span class="story-tag">100% Organisch</span>
                 </div>
-                <h3>02. Açaí Bowls</h3>
-                <p>Direkt aus dem Amazonas in deine Bowl. Original brasilianisches, eiskaltes Açaí-Püree – super cremig, vegan und randvoll mit Antioxidantien. Such dir deine Premium-Toppings selbst aus.</p>
-                <div class="card-tags">
-                    <span class="tag">100% Vegan</span>
-                    <span class="tag">Superfoods</span>
+                <div class="story-text">
+                    <p>Direkt aus dem wilden Amazonas-Gebiet in deine Bowl. Wir verwenden ausschließlich original brasilianisches, schockgefrostetes Açaí-Püree – vollkommen ohne künstliche Zusätze oder Industriezucker. Extrem cremig geschlagen, tiefviolett, eiskalt und randvoll mit wertvollen Antioxidantien. Veredelt mit High-End Toppings nach Wahl.</p>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#b81d24" stroke-width="2" stroke-linecap="round">
-                        <path d="M12 2C11.5 3.5 10 4 8.5 4C8 4 7.5 3.8 7 3.5C6.5 4.5 6.8 6 7.5 7M12 2C12.5 3.5 14 4 15.5 4C16 4 16.5 3.8 17 3.5C17.5 4.5 17.2 6 16.5 7M12 2V6M12 6C8 6 5 9 5 14C5 18.5 9 22 12 22C15 22 19 18.5 19 14C19 9 16 6 12 6Z"/>
-                        <circle cx="9" cy="11" r="0.5" fill="#b81d24"/><circle cx="15" cy="12" r="0.5" fill="#b81d24"/><circle cx="12" cy="15" r="0.5" fill="#b81d24"/>
-                    </svg>
+            <div class="story-block">
+                <div class="story-num">03</div>
+                <div class="story-title">
+                    <h3>Liquid Luxury</h3>
+                    <span class="story-tag">Pure Gönnung</span>
                 </div>
-                <h3>03. Liquid Luxury</h3>
-                <p>Der ultimative Foodtrend. Knackfrische, süße Erdbeeren, die im Becher direkt vor deinen Augen mit warmer, dickflüssiger Premium-Schokolade aus dem Brunnen übergossen werden.</p>
-                <div class="card-tags">
-                    <span class="tag">Live-Guss</span>
-                    <span class="tag">Pure Gönnung</span>
+                <div class="story-text">
+                    <p>Der absolute Endgegner unter den Foodtrends. Knackfrische, handverlesene und süße Erdbeeren werden im transparenten RIO-Becher arrangiert und direkt vor deinen Augen mit warmer, samtig-dickflüssiger Premium-Schokolade aus fließenden Brunnen übergossen. Ein unvergleichliches Texturspiel aus heiß und kalt.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="vibe">
-        <div class="vibe-content">
-            <h2>Tech meets Tropics</h2>
-            <p>RIO ist kein normales Café. RIO ist deine kurze Auszeit vom Großstadt-Dschungel. Ein minimalistischer, moderner Store mit Dschungel-Elementen, sanften Beats und Produkten, die nicht nur unverschämt gut schmecken, sondern auch verdammt gut aussehen.</p>
+    <section class="vibe-panel">
+        <div class="vibe-wrapper">
+            <h4>Über das Konzept</h4>
+            <p>RIO ist kein normales Café. RIO ist deine kurze, progressive Auszeit vom urbanen Großstadt-Dschungel. Ein minimalistischer, cleaner Store voller architektonischer Kontraste, sanfter Bässen und Produkten, die nicht nur handwerklich perfekt schmecken, sondern auch visuell Maßstäbe setzen.</p>
         </div>
     </section>
 
-    <section class="location">
-        <div class="location-info">
-            <svg class="pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
-                <path d="M12 21C16 17.5 19 14.211 19 10.5C19 6.35786 15.866 3 12 3C8.13401 3 5 6.35786 5 10.5C5 14.211 8 17.5 12 21Z" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="12" cy="10" r="2.5"/>
+    <section class="closing-poster">
+        <div class="poster-box">
+            <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M12 21C16 17.5 19 14.211 19 10.5C19 6.35786 15.866 3 12 3C8.13401 3 5 6.35786 5 10.5C5 14.211 8 17.5 12 21Z"/>
+                <circle cx="12" cy="10" r="2"/>
             </svg>
-            <div class="address">Berger Strasse 27</div>
+            <div class="street">Berger Strasse 27</div>
             <div class="city">Frankfurt</div>
-            <div>
-                <span class="status-badge">Opening Soon</span>
-            </div>
+            <div class="badge-opening">Opening Soon</div>
         </div>
     </section>
 
