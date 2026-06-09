@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RIO — Tech meets Tropics</title>
     <style>
+        /* Einbinden der Premium-Schriften von Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
         :root {
-            --bg-cream: #fdfbf7;
-            --primary-green: #0b3c26;
-            --accent-red: #b81d24;
-            --accent-gold: #d4b295;
+            --bg-cream: #fdfbf7;        /* Hellcreme vom Flyer */
+            --primary-green: #0b3c26;   /* Tiefes Dschungelgrün vom Flyer */
+            --accent-tan: #d4b295;     /* Edles Sand/Gold vom Button */
+            --accent-red: #b81d24;     /* Erdbeer-Rot */
             --text-dark: #1c1c1c;
             --text-light: #fdfbf7;
-            --card-bg: #ffffff;
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
         }
@@ -33,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Tropical Shadows Background */
+        /* Subtile Palmenblatt-Schatten im Hintergrund (Pure CSS) */
         .ambient-shadows {
             position: fixed;
             top: 0;
@@ -45,7 +45,7 @@
             opacity: 0.04;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cpath d='M0,0 C120,40 240,10 320,80 C400,150 380,280 480,350 C580,420 700,380 800,450 L800,0 Z' fill='%230b3c26'/%3E%3Cpath d='M100,600 C200,500 150,400 300,350 C450,300 500,450 650,400 C750,370 780,480 800,600 Z' fill='%230b3c26'/%3E%3C/svg%3E");
             background-size: cover;
-            filter: blur(20px);
+            filter: blur(30px);
         }
 
         header {
@@ -53,7 +53,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 30px 5%;
+            padding: 40px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -62,25 +62,20 @@
 
         .logo {
             font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 3px;
             color: var(--primary-green);
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-decoration: none;
+            gap: 12px;
         }
 
         .logo svg {
-            width: 35px;
-            height: 35px;
+            width: 38px;
+            height: 38px;
             fill: var(--primary-green);
-        }
-
-        .nav-social {
-            display: flex;
-            gap: 20px;
         }
 
         .nav-social a {
@@ -89,409 +84,5 @@
             font-weight: 600;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: opacity 0.3s;
-        }
-
-        .nav-social a:hover {
-            opacity: 0.7;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 20px 80px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--primary-green);
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 6vw, 5.5rem);
-            font-weight: 400;
-            line-height: 1.1;
-            color: var(--primary-green);
-            max-width: 900px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            font-weight: 300;
-            max-width: 600px;
-            margin-bottom: 40px;
-            color: #4a4a4a;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-gold);
-            color: var(--text-dark);
-            font-family: var(--font-sans);
-            font-weight: 600;
-            font-size: 1rem;
-            text-transform: uppercase;
             letter-spacing: 2px;
-            padding: 16px 40px;
-            border: none;
-            border-radius: 0px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 178, 149, 0.2);
-        }
-
-        .btn:hover {
-            background-color: var(--primary-green);
-            color: var(--text-light);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(11, 60, 38, 0.2);
-        }
-
-        /* Highlights Section */
-        .highlights {
-            padding: 100px 5%;
-            position: relative;
-            z-index: 1;
-            background-color: #fff;
-            border-top: 1px solid rgba(11, 60, 38, 0.05);
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0auto 80px auto;
-        }
-
-        .section-header h2 {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            color: var(--primary-green);
-            margin-bottom: 20px;
-        }
-
-        .section-header p {
-            font-size: 1.1rem;
-            color: #666;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background-color: var(--bg-cream);
-            padding: 50px 40px;
-            border-radius: 0px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            border-top: 4px solid var(--primary-green);
-        }
-
-        .card:nth-child(2) {
-            border-top-color: var(--accent-gold);
-        }
-
-        .card:nth-child(3) {
-            border-top-color: var(--accent-red);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-        }
-
-        .card-icon {
-            margin-bottom: 30px;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-
-        .card-icon svg {
-            width: 32px;
-            height: 32px;
-        }
-
-        .card h3 {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            color: var(--primary-green);
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            color: #555;
-            font-size: 1rem;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tag {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 4px 12px;
-            background-color: rgba(0,0,0,0.04);
-            border-radius: 20px;
-            color: #444;
-        }
-
-        /* Vibe Section */
-        .vibe {
-            background-color: var(--primary-green);
-            color: var(--text-light);
-            padding: 120px 5%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .vibe-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .vibe h2 {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-
-        .vibe p {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            font-weight: 300;
-            opacity: 0.9;
-            line-height: 1.8;
-        }
-
-        /* Location Section */
-        .location {
-            padding: 100px 5%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .location-info {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 60px 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.02);
-            border: 1px solid rgba(11, 60, 38, 0.05);
-        }
-
-        .location-icon {
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        .location h3 {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            color: var(--primary-green);
-            margin-bottom: 10px;
-        }
-
-        .location p {
-            font-size: 1.2rem;
-            color: #444;
-            margin-bottom: 30px;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background-color: rgba(212, 178, 149, 0.15);
-            color: #9c7352;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
-        }
-
-        footer {
-            padding: 40px 5%;
-            text-align: center;
-            background-color: #fff;
-            border-top: 1px solid rgba(0,0,0,0.03);
-            font-size: 0.9rem;
-            color: #888;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            header {
-                padding: 20px 5%;
-            }
-            .hero {
-                padding-top: 140px;
-            }
-            .card {
-                padding: 40px 30px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="ambient-shadows"></div>
-
-    <header>
-        <a href="#" class="logo">
-            <!-- Toucan Icon Minimalist -->
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.27,6.33L3,21a1,1,0,0,0,1,1H7.5a9.92,9.92,0,0,0,4.83-1.25A10,10,0,0,0,12,2Zm1.5,6A1.5,1.5,0,1,1,12,9.5,1.5,1.5,0,0,1,13.5,8Zm-2,10.45a7.92,7.92,0,0,1-3.66-.89,1,1,0,0,0-1,.08L5.31,19.22A7.94,7.94,0,0,1,4,12a8,8,0,0,1,7.53-8c.16,0,.31,0,.47,0A7.88,7.88,0,0,1,19.9,10c0,4.08-3.07,7.44-7.06,7.93A1,1,0,0,0,11.5,18.45Z"/>
-            </svg>
-            RIO
-        </a>
-        <div class="nav-social">
-            <a href="#" target="_blank">Instagram</a>
-            <a href="#" target="_blank">TikTok</a>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="hero-badge">Hier entsteht</div>
-        <h1>Etwas Besonderes</h1>
-        <p>High-Tech Coffee, Superfoods &amp; pure Gönnung. Erlebe Frankfurts neuen Hotspot auf der Berger Straße.</p>
-        <a href="#stay-tuned" class="btn">Stay Tuned!</a>
-    </section>
-
-    <section class="highlights">
-        <div class="section-header">
-            <h2>The Big Three</h2>
-            <p>Wir kombinieren absolute Frische, die Zukunft des Kaffees und den ultimativen Vibe für deine Sinne.</p>
-        </div>
-        
-        <div class="grid">
-            <!-- Card 1: Robot Coffee -->
-            <div class="card">
-                <div class="card-icon">
-                    <!-- Robot / Coffee SVG -->
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2V4M5 10H3M21 10H19M12 4C8.68629 4 6 6.68629 6 10V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V10C18 6.68629 15.3137 4 12 4ZM9 11C9 11.5523 8.55228 12 8 12C7.44772 12 7 11.5523 7 11C7 10.4477 7.44772 10 8 10C8.55228 10 9 10.4477 9 11ZM17 11C17 11.5523 16.5523 12 16 12C15.4477 12 15 11.5523 15 11C15 10.4477 15.4477 10 16 10C16.5523 10 17 10.4477 17 11ZM9 15H15V17H9V15Z" stroke="#0b3c26" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <h3>01. Future Coffee</h3>
-                <p>Vergiss faden Filterkaffee. Unser Kaffeeroboter arbeitet mit chirurgischer Präzision für die perfekte Crema und Next-Level Latte Art.</p>
-                <div class="card-tags">
-                    <span class="tag">Robot-Barista</span>
-                    <span class="tag">Milchalternativen</span>
-                    <span class="tag">Insta-Worthy</span>
-                </div>
-            </div>
-
-            <!-- Card 2: Acai Bowls -->
-            <div class="card">
-                <div class="card-icon">
-                    <!-- Bowl SVG -->
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 12C2 16.9706 6.02944 21 11 21C15.9706 21 20 16.9706 20 12H2Z" fill="#d4b295"/>
-                        <path d="M12 3C8.5 3 6 5.5 6 8.5C6 9 6.5 10 8 10C9.5 10 10.5 8.5 12 8.5C13.5 8.5 14.5 10 16 10C17.5 10 18 9 18 8.5C18 5.5 15.5 3 12 3Z" fill="#0b3c26"/>
-                    </svg>
-                </div>
-                <h3>02. Amazonian Energy</h3>
-                <p>Frisch, eiskalt und vollgepackt mit Antioxidantien. Wir bringen das original brasilianische Açaí-Püree cremig in deine Bowl.</p>
-                <div class="card-tags">
-                    <span class="tag">100% Vegan</span>
-                    <span class="tag">Superfoods</span>
-                    <span class="tag">Custom Toppings</span>
-                </div>
-            </div>
-
-            <!-- Card 3: Strawberries -->
-            <div class="card">
-                <div class="card-icon">
-                    <!-- Strawberry / Chocolate SVG -->
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C11.5 3.5 10 4 8.5 4C8 4 7.5 3.8 7 3.5C6.5 4.5 6.8 6 7.5 7M12 2C12.5 3.5 14 4 15.5 4C16 4 16.5 3.8 17 3.5C17.5 4.5 17.2 6 16.5 7M12 2V6M12 6C8 6 5 9 5 14C5 18.5 9 22 12 22C15 22 19 18.5 19 14C19 9 16 6 12 6Z" stroke="#b81d24" stroke-width="2" stroke-linecap="round"/>
-                        <circle cx="9" cy="11" r="1" fill="#b81d24"/>
-                        <circle cx="15" cy="12" r="1" fill="#b81d24"/>
-                        <circle cx="12" cy="15" r="1" fill="#b81d24"/>
-                        <circle cx="9" cy="17" r="1" fill="#b81d24"/>
-                        <circle cx="15" cy="17" r="1" fill="#b81d24"/>
-                    </svg>
-                </div>
-                <h3>03. Liquid Luxury</h3>
-                <p>Der virale Foodtrend: Knackige, süße Erdbeeren, die live vor deinen Augen mit warmer, flüssiger Premium-Schokolade übergossen werden.</p>
-                <div class="card-tags">
-                    <span class="tag">Live-Guss</span>
-                    <span class="tag">Frucht &amp; Schoko</span>
-                    <span class="tag">Pure Gönnung</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="vibe">
-        <div class="vibe-content">
-            <h2>Warum RIO?</h2>
-            <p>RIO ist kein normales Café. RIO ist deine kurze Auszeit vom Großstadt-Dschungel. Ein minimalistischer, moderner Store mit Dschungel-Elementen, sanften Beats und Produkten, die nicht nur unverschämt gut schmecken, sondern auch verdammt gut aussehen.</p>
-        </div>
-    </section>
-
-    <section class="location" id="stay-tuned">
-        <div class="location-info">
-            <div class="location-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 21C16 17.5 19 14.211 19 10.5C19 6.35786 15.866 3 12 3C8.13401 3 5 6.35786 5 10.5C5 14.211 8 17.5 12 21Z" stroke="#0b3c26" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="12" cy="10" r="3" stroke="#0b3c26" stroke-width="2"/>
-                </svg>
-            </div>
-            <h3>Besuche uns</h3>
-            <p>Berger Straße 27<br>Frankfurt am Main</p>
-            <span class="status-badge">Opening Soon</span>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 RIO Frankfurt. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
+            margin-left:
