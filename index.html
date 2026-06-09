@@ -3,20 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIO — Tech meets Tropics</title>
+    <title>RIO — Frankfurt</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-
-        :root {
-            --bg-cream: #fdfbf7;
-            --primary-green: #0b3c26;
-            --accent-tan: #d4b295;
-            --accent-red: #b81d24;
-            --text-dark: #1c1c1c;
-            --text-light: #fdfbf7;
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Plus Jakarta Sans', sans-serif;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap');
 
         * {
             box-sizing: border-box;
@@ -25,421 +14,270 @@
         }
 
         body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-cream);
-            color: var(--text-dark);
-            line-height: 1.6;
+            background-color: #f3efe3; /* Exakter, warmer edler Cremeton aus deinem Foto */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #111111;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 20px;
             overflow-x: hidden;
+            position: relative;
         }
 
-        .ambient-shadows {
-            position: fixed;
+        /* Definition der Palmenblätter mit extrem weichem, fließendem Schattenverlauf (Depth of Field) */
+        .palm-container {
+            position: absolute;
+            width: 40vw;
+            max-width: 450px;
+            height: auto;
+            pointer-events: none;
+            z-index: 1;
+            /* Der fließende Übergang entsteht durch weiche, mehrschichtige Schatten */
+            filter: drop-shadow(15px 25px 30px rgba(15, 35, 20, 0.22)) drop-shadow(30px 50px 60px rgba(0, 0, 0, 0.15));
+        }
+
+        .palm-tl {
+            top: -5%;
+            left: -5%;
+            transform: rotate(-5deg);
+        }
+
+        .palm-tr {
+            top: -5%;
+            right: -5%;
+            transform: scaleX(-1) rotate(-12deg);
+        }
+
+        .palm-bl {
+            bottom: -8%;
+            left: -6%;
+            transform: scaleY(-1) rotate(15deg);
+        }
+
+        .palm-br {
+            bottom: -5%;
+            right: -5%;
+            transform: scale(-1) rotate(-8deg);
+        }
+
+        .palm-container svg {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Sanfter, diffuser Schatteneffekt von Blättern auf dem gesamten Hintergrund */
+        .ambient-shadow-overlay {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cpath d='M0,0 C120,40 240,10 320,80 C400,150 380,280 480,350 C580,420 700,380 800,450 L800,0 Z' fill='%230b3c26'/%3E%3Cpath d='M100,600 C200,500 150,400 300,350 C450,300 500,450 650,400 C750,370 780,480 800,600 Z' fill='%230b3c26'/%3E%3C/svg%3E");
-            background-size: cover;
-            filter: blur(30px);
+            opacity: 0.07;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0,100 Q40,40 100,0' stroke='%230b3c26' stroke-width='1.5' fill='none'/%3E%3Cpath d='M20,70 Q-5,45 10,40 Q25,50 20,70 Z' fill='%230b3c26'/%3E%3Cpath d='M40,50 Q15,25 30,20 Q45,30 40,50 Z' fill='%230b3c26'/%3E%3C/svg%3E");
+            background-size: 50% 50%;
+            filter: blur(15px); /* Macht den Schatten extrem fließend und weich */
         }
 
+        /* Header mit dem exakten RIO-Tukan-Logo aus deinem Design */
         header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 40px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: relative;
             z-index: 10;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .logo {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            color: var(--primary-green);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo svg {
-            width: 38px;
-            height: 38px;
-            fill: var(--primary-green);
-        }
-
-        .nav-social a {
-            color: var(--primary-green);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-left: 20px;
-            transition: opacity 0.3s;
-        }
-
-        .nav-social a:hover {
-            opacity: 0.6;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 140px 20px 80px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            color: var(--primary-green);
-            margin-bottom: 15px;
-            font-weight: 400;
-        }
-
-        .hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.8rem, 7vw, 6rem);
-            font-weight: 400;
-            line-height: 1.1;
-            color: var(--primary-green);
-            max-width: 1000px;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-tan);
-            color: var(--primary-green);
-            font-family: var(--font-sans);
-            font-weight: 600;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            padding: 18px 45px;
-            border: none;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 178, 149, 0.25);
-        }
-
-        .btn:hover {
-            background-color: var(--primary-green);
-            color: var(--text-light);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(11, 60, 38, 0.2);
-        }
-
-        .highlights {
-            padding: 120px 5%;
-            position: relative;
-            z-index: 1;
-            background-color: #ffffff;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 80px auto;
-        }
-
-        .section-header h2 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
-            color: var(--primary-green);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .section-header p {
-            font-size: 1.2rem;
-            color: #555;
-            font-weight: 300;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background-color: var(--bg-cream);
-            padding: 60px 40px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            border-top: 5px solid var(--primary-green);
-        }
-
-        .card:nth-child(2) { border-top-color: var(--accent-tan); }
-        .card:nth-child(3) { border-top-color: var(--accent-red); }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-        }
-
-        .card-icon {
-            margin-bottom: 30px;
-            width: 70px;
-            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: white;
-            border-radius: 50%;
+            gap: 2px;
+            color: #111111;
         }
 
-        .card-icon svg {
-            width: 35px;
-            height: 35px;
+        .serif-char {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 10vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1;
         }
 
-        .card h3 {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            color: var(--primary-green);
-            margin-bottom: 20px;
+        .toucan-container {
+            height: clamp(3.1rem, 9vw, 4.1rem);
+            display: flex;
+            align-items: center;
+            margin-top: clamp(4px, 1.2vw, 8px);
+            padding: 0 2px;
         }
 
-        .card p {
-            color: #444;
-            font-size: 1.05rem;
-            margin-bottom: 30px;
+        .toucan-svg {
+            height: 100%;
+            width: auto;
+        }
+
+        /* Hauptinhalt exakt zentriert und formatiert wie auf dem Foto */
+        main {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             flex-grow: 1;
+            padding: 40px 0;
         }
 
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tag {
-            font-size: 0.8rem;
-            font-weight: 700;
+        .subtitle {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 6px 14px;
-            background-color: rgba(0,0,0,0.04);
-            color: #333;
+            letter-spacing: 5px;
+            color: #111111;
+            margin-bottom: 20px;
+            font-weight: 400;
         }
 
-        .vibe {
-            background-color: var(--primary-green);
-            color: var(--text-light);
-            padding: 140px 5%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .vibe-content {
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .vibe h2 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            margin-bottom: 35px;
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 9vw, 5.2rem);
+            font-weight: 400;
             text-transform: uppercase;
+            line-height: 1.15;
             letter-spacing: 1px;
+            color: #111111;
+            margin-bottom: 45px;
         }
 
-        .vibe p {
-            font-size: clamp(1.15rem, 2.5vw, 1.4rem);
-            font-weight: 300;
-            opacity: 0.9;
-            line-height: 1.8;
+        /* Der exakte eckige "STAY TUNED!" Button */
+        .button-wrapper {
+            margin-top: 5px;
         }
 
-        .location {
-            padding: 120px 5%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .location-info {
-            max-width: 650px;
-            margin: 0 auto;
-            background: white;
-            padding: 70px 50px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.02);
-            border: 1px solid rgba(11, 60, 38, 0.05);
-        }
-
-        .location-icon {
-            margin-bottom: 25px;
-        }
-
-        .location h3 {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            color: var(--primary-green);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .location p {
-            font-size: 1.3rem;
-            color: #333;
-            margin-bottom: 35px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .status-badge {
+        .btn-stay-tuned {
             display: inline-block;
-            padding: 10px 25px;
-            background-color: rgba(212, 178, 149, 0.15);
-            color: #9c7352;
+            background-color: #d9c2b0; /* Exakter beigefarbener Button-Ton aus dem Foto */
+            color: #111111;
+            text-decoration: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 2vw, 1rem) ;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            padding: 15px 40px;
+            border-radius: 0; /* Absolut eckig wie auf dem Foto */
+            transition: all 0.3s ease;
+        }
+
+        .btn-stay-tuned:hover {
+            background-color: #cbab95;
+            transform: translateY(-1px);
+        }
+
+        /* Footer mit der Location-Info im exakten Stil */
+        footer {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .location-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .pin-icon {
+            width: clamp(28px, 6vw, 34px);
+            height: clamp(28px, 6vw, 34px);
+            margin-bottom: 18px;
+            color: #111111;
+        }
+
+        .address, .city {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(0.95rem, 2.2vw, 1.1rem);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
-            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
-        footer {
-            padding: 50px 5%;
-            text-align: center;
-            background-color: #ffffff;
-            border-top: 1px solid rgba(0,0,0,0.03);
-            font-size: 0.9rem;
-            color: #777;
-            position: relative;
-            z-index: 1;
-            letter-spacing: 1px;
-        }
-
-        @media (max-width: 768px) {
-            header { padding: 30px 5%; }
-            .hero { padding-top: 160px; }
-            .card { padding: 45px 30px; }
-            .location-info { padding: 50px 25px; }
+        @media (max-height: 650px) {
+            body { padding: 40px 20px; }
+            .headline { margin-bottom: 25px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-shadows"></div>
+    <svg style="display: none;">
+        <defs>
+            <g id="palm-frond">
+                <path d="M0,100 Q25,65 85,0" stroke="#123018" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M8,90 Q-18,65 2,60 Q12,70 10,87 Z" fill="#15381c"/>
+                <path d="M16,80 Q-12,48 12,46 Q20,56 18,75 Z" fill="#194221"/>
+                <path d="M25,68 Q0,25 25,28 Q30,38 27,62 Z" fill="#15381c"/>
+                <path d="M35,56 Q12,10 36,16 Q42,26 37,50 Z" fill="#194221"/>
+                <path d="M45,44 Q28,-3 48,6 Q52,16 47,38 Z" fill="#15381c"/>
+                <path d="M55,32 Q42,-12 60,-2 Q64,8 57,26 Z" fill="#194221"/>
+                <path d="M65,20 Q56,-15 72,-5 Q73,5 67,16 Z" fill="#15381c"/>
+                <path d="M6,93 Q32,86 22,76 Q12,73 8,89 Z" fill="#0f2914"/>
+                <path d="M14,83 Q42,74 30,64 Q20,64 16,79 Z" fill="#0d2412"/>
+                <path d="M22,72 Q50,60 40,50 Q30,52 25,68 Z" fill="#0f2914"/>
+                <path d="M32,60 Q58,47 48,37 Q38,40 34,56 Z" fill="#0d2412"/>
+                <path d="M42,48 Q66,34 56,25 Q47,29 44,44 Z" fill="#0f2914"/>
+                <path d="M52,36 Q74,22 64,14 Q55,18 53,32 Z" fill="#0d2412"/>
+            </g>
+        </defs>
+    </svg>
+
+    <div class="ambient-shadow-overlay"></div>
+
+    <div class="palm-container palm-tl"><svg viewBox="0 0 100 100"><use href="#palm-frond"/></svg></div>
+    <div class="palm-container palm-tr"><svg viewBox="0 0 100 100"><use href="#palm-frond"/></svg></div>
+    <div class="palm-container palm-bl"><svg viewBox="0 0 100 100"><use href="#palm-frond"/></svg></div>
+    <div class="palm-container palm-br"><svg viewBox="0 0 100 100"><use href="#palm-frond"/></svg></div>
 
     <header>
-        <a href="#" class="logo">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.27,6.33L3,21a1,1,0,0,0,1,1H7.5a9.92,9.92,0,0,0,4.83-1.25A10,10,0,0,0,12,2Zm1.5,6A1.5,1.5,0,1,1,12,9.5,1.5,1.5,0,0,1,13.5,8Zm-2,10.45a7.92,7.92,0,0,1-3.66-.89,1,1,0,0,0-1,.08L5.31,19.22A7.94,7.94,0,0,1,4,12a8,8,0,0,1,7.53-8c.16,0,.31,0,.47,0A7.88,7.88,0,0,1,19.9,10c0,4.08-3.07,7.44-7.06,7.93A1,1,0,0,0,11.5,18.45Z"/>
-            </svg>
-            RIO
-        </a>
-        <div class="nav-social">
-            <a href="#" target="_blank">Instagram</a>
-            <a href="#" target="_blank">TikTok</a>
+        <div class="logo">
+            <span class="serif-char">R</span>
+            <div class="toucan-container">
+                <svg class="toucan-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 26C36 26 41 12 55 12C65 12 94 14 89 41C86 44 75 42 65 37C58 33 52 39 50 45C46 58 48 76 45 88C44 92 41 94 39 94C37 94 36 90 37 82C38 70 34 47 38 26Z" fill="currentColor"/>
+                    <path d="M41 84L36 107H42L44 86Z" fill="currentColor"/>
+                    <circle cx="50" cy="22" r="2.8" fill="#f3efe3"/>
+                </svg>
+            </div>
+            <span class="serif-char">o</span>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-badge">Hier entsteht</div>
-        <h1>Etwas Besonderes</h1>
-        <a href="#explore" class="btn">Stay Tuned!</a>
-    </section>
-
-    <section class="highlights" id="explore">
-        <div class="section-header">
-            <h2>The Big Three</h2>
-            <p>Die perfekte Fusion aus Tech, Frische und absolutem Foodporn.</p>
+    <main>
+        <div class="subtitle">Hier entsteht</div>
+        <h1 class="headline">Etwas<br>besonderes</h1>
+        <div class="button-wrapper">
+            <a href="#" class="btn-stay-tuned">Stay Tuned!</a>
         </div>
-        
-        <div class="grid">
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#0b3c26" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2V4M5 10H3M21 10H19M12 4C8.68629 4 6 6.68629 6 10V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V10C18 6.68629 15.3137 4 12 4ZM9 11C9 11.5523 8.55228 12 8 12C7.44772 12 7 11.5523 7 11C7 10.4477 7.44772 10 8 10C8.55228 10 9 10.4477 9 11ZM17 11C17 11.5523 16.5523 12 16 12C15.4477 12 15 11.5523 15 11C15 10.4477 15.4477 10 16 10C16.5523 10 17 10.4477 17 11ZM9 15H15V17H9V15Z"/>
-                    </svg>
-                </div>
-                <h3>01. Future Coffee</h3>
-                <p>Erlebe Kaffee in chirurgischer Präzision. Unser Kaffeeroboter kreiert die perfekte Crema, grammgenau temperierte Milchalternativen und faszinierende Latte Art live vor deinen Augen.</p>
-                <div class="card-tags">
-                    <span class="tag">Robot-Barista</span>
-                    <span class="tag">Next-Gen Tech</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 12C2 16.9706 6.02944 21 11 21C15.9706 21 20 16.9706 20 12H2Z" fill="#d4b295"/>
-                        <path d="M12 3C8.5 3 6 5.5 6 8.5C6 9 6.5 10 8 10C9.5 10 10.5 8.5 12 8.5C13.5 8.5 14.5 10 16 10C17.5 10 18 9 18 8.5C18 5.5 15.5 3 12 3Z" fill="#0b3c26"/>
-                    </svg>
-                </div>
-                <h3>02. Açaí Bowls</h3>
-                <p>Direkt aus dem Amazonas in deine Bowl. Original brasilianisches, eiskaltes Açaí-Püree – super cremig, vegan und randvoll mit Antioxidantien. Such dir deine Premium-Toppings selbst aus.</p>
-                <div class="card-tags">
-                    <span class="tag">100% Vegan</span>
-                    <span class="tag">Superfoods</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#b81d24" stroke-width="2" stroke-linecap="round">
-                        <path d="M12 2C11.5 3.5 10 4 8.5 4C8 4 7.5 3.8 7 3.5C6.5 4.5 6.8 6 7.5 7M12 2C12.5 3.5 14 4 15.5 4C16 4 16.5 3.8 17 3.5C17.5 4.5 17.2 6 16.5 7M12 2V6M12 6C8 6 5 9 5 14C5 18.5 9 22 12 22C15 22 19 18.5 19 14C19 9 16 6 12 6Z"/>
-                        <circle cx="9" cy="11" r="0.5" fill="#b81d24"/><circle cx="15" cy="12" r="0.5" fill="#b81d24"/><circle cx="12" cy="15" r="0.5" fill="#b81d24"/>
-                    </svg>
-                </div>
-                <h3>03. Liquid Luxury</h3>
-                <p>Der ultimative Foodtrend. Knackfrische, süße Erdbeeren, die im Becher direkt vor deinen Augen mit warmer, dickflüssiger Premium-Schokolade aus dem Brunnen übergossen werden.</p>
-                <div class="card-tags">
-                    <span class="tag">Live-Guss</span>
-                    <span class="tag">Pure Gönnung</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="vibe">
-        <div class="vibe-content">
-            <h2>Tech meets Tropics</h2>
-            <p>RIO ist kein normales Café. RIO ist deine kurze Auszeit vom Großstadt-Dschungel. Ein minimalistischer, moderner Store mit Dschungel-Elementen, sanften Beats und Produkten, die nicht nur unverschämt gut schmecken, sondern auch verdammt gut aussehen.</p>
-        </div>
-    </section>
-
-    <section class="location">
-        <div class="location-info">
-            <div class="location-icon">
-                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#0b3c26" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 21C16 17.5 19 14.211 19 10.5C19 6.35786 15.866 3 12 3C8.13401 3 5 6.35786 5 10.5C5 14.211 8 17.5 12 21Z"/>
-                    <circle cx="12" cy="10" r="3"/>
-                </svg>
-            </div>
-            <h3>Hier findest du uns</h3>
-            <p>Berger Straße 27<br>Frankfurt am Main</p>
-            <span class="status-badge">Opening Soon</span>
-        </div>
-    </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 RIO Frankfurt. All rights reserved.</p>
+        <div class="location-container">
+            <svg class="pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+                <path d="M12 21C16 17.5 19 14.211 19 10.5C19 6.35786 15.866 3 12 3C8.13401 3 5 6.35786 5 10.5C5 14.211 8 17.5 12 21Z" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="10" r="2.5"/>
+            </svg>
+            <div class="address">Berger Strasse 27</div>
+            <div class="city">Frankfurt</div>
+        </div>
     </footer>
 
 </body>
